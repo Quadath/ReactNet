@@ -5,10 +5,11 @@ import './app.css';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import ItemList from '../itemList';
-import CharDetails from '../charDetails';
+import ItemDetails from '../itemDetails/itemDetails';
 import ErrorMessage from '../errorMessage/errorMessage';
-import CharacterPage from '../characterPage/characterPage';
+import CharacterPage from '../pages/characterPage/characterPage';
 import GotService from '../../services/gotService';
+import HousePage from '../pages/housePage/housePage';
 
 
 export default class App extends Component  {
@@ -46,26 +47,8 @@ export default class App extends Component  {
                         </Col>
                  </Row>
             <CharacterPage/>
-            <Row>
-                <Col md='6'>
-                    <ItemList onItemSelected={this.onItemSelected}
-                    getData={this.gotService.getAllBooks}
-                    renderItem={(item) => item.name}/>
-                </Col>
-                <Col md='6'>
-                    <CharDetails charId={this.state.selectedChar}/>
-                </Col>
-            </Row>
-            <Row>
-                <Col md='6'>
-                    <ItemList onItemSelected={this.onItemSelected}
-                    getData={this.gotService.getAllHouses}
-                    renderItem={(item) => item.name}/>
-                </Col>
-                <Col md='6'>
-                    <CharDetails charId={this.state.selectedChar}/>
-                </Col>
-            </Row>
+            <HousePage/>
+            
                 </Container>
             </>
         );
