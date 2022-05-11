@@ -48,8 +48,6 @@ export default class ItemDetails extends Component {
     }
 
     render() {
-        console.log(this.state.itemId);
-        console.log(this.props);
         if(!this.props.itemId) {
             return <span className='select-error'>Please select a character</span>
         }

@@ -10,6 +10,9 @@ import ErrorMessage from '../errorMessage/errorMessage';
 import CharacterPage from '../pages/characterPage/characterPage';
 import GotService from '../../services/gotService';
 import HousePage from '../pages/housePage/housePage';
+import BookPage from '../pages/booksPage/bookPage';
+import BooksItem from '../pages/bookItem';
+import { BrowserRouter as Router, Outlet, Route, Routes } from 'react-router-dom';
 
 
 export default class App extends Component  {
@@ -34,23 +37,31 @@ export default class App extends Component  {
         const randomChar = this.state.isRandomCharVisible ? <RandomChar/> : null;
         
         return (
-            <> 
-                <Container>
-                    <Header />
-                </Container>
-                <Container>
-                    <Row>
-                        <Col lg={{size: 5, offset: 0}}>
-                            {randomChar}
-                            <button className='random-char__btn'
-                            onClick={this.toggleRandomChar}>Toggle random character</button>
-                        </Col>
-                 </Row>
-            <CharacterPage/>
-            <HousePage/>
+            <Router> 
+                <div className='app'>
+                    <Container>
+                        <Header />
+                    </Container>
+                    <Container>
+                        <Row>
+                            <Col lg={{size: 5, offset: 0}}>
+                                {randomChar}
+                                <button className='random-char__btn'
+                                onClick={this.toggleRandomChar}>Toggle random character</button>
+                            </Col>
+                        </Row>
+                        <Routes>
+                            <Route path='/characters' element={<CharacterPage/>}/>
+                            <Route path='/houses' element={<HousePage/>}/>
+                            <Route path='/books' exact element={<BookPage/>}/>
+                            <Route path='/books/:id'  render={
+                                () => <BooksItem/>
+                            }/>
+                        </Routes>
             
-                </Container>
-            </>
+                    </Container>
+                </div>
+            </Router>
         );
     }
 };
