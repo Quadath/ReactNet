@@ -3,10 +3,10 @@ import ItemList from '../../itemList';
 import ItemDetails from '../../itemDetails/itemDetails';
 import ErrorMessage from '../../errorMessage/errorMessage';
 import GotService from '../../../services/gotService';
-import RowBlock from '../../rowBlock/rowBlock';
 import { Field } from '../../itemDetails/itemDetails';
+import RowBlock from '../../rowBlock/rowBlock';
 
-export default class BookPage extends Component {
+class bookPage extends Component {
     gotService = new GotService();
     state = {
         selectedBook: 3,
@@ -30,7 +30,9 @@ export default class BookPage extends Component {
             return <ErrorMessage/>
         }
         const itemList = (
-            <ItemList onItemSelected={this.onItemSelected}
+            <ItemList onItemSelected={(itemId) => {
+                this.props.history.push(`/books/${itemId}`)
+            }}
             getData={this.gotService.getAllBooks}
             renderItem={({name, authors}) => `${name} (${authors})`}/>
         )
@@ -46,3 +48,5 @@ export default class BookPage extends Component {
         )
     }
 }
+
+export default bookPage;
